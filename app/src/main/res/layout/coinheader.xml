@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/pro_in"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="32dp"
         android:layout_alignParentLeft="true"
         android:gravity="center"
         android:orientation="horizontal">
@@ -65,11 +65,10 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="32dp"
         android:layout_alignParentRight="true"
         android:background="@drawable/edit_border"
         android:gravity="center"
-
         android:orientation="horizontal">
 
         <TextView
@@ -86,7 +85,7 @@
 
         <ImageView
             android:id="@+id/img_para"
-            android:layout_width="40dp"
+            android:layout_width="41.25dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="-10dp"
             android:background="@drawable/parell_green"
