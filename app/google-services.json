@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "76469689893",
+    "firebase_url": "https://sqorrapp.firebaseio.com",
+    "project_id": "sqorrapp",
+    "storage_bucket": "sqorrapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76469689893:android:99f87d7d595d7418",
+        "android_client_info": {
+          "package_name": "com.vernos.sqorr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76469689893-agi8d2mrpr3eog5u836nn1qahbf2hse6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX6GaDLOMCibUeMfp19--j0y8aUfMRCG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76469689893-agi8d2mrpr3eog5u836nn1qahbf2hse6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

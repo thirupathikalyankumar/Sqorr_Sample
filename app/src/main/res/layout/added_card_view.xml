@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="0dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="2dp">
+<LinearLayout
+    android:id="@+id/llCard"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/bg_linear"
+    android:layout_height="wrap_content">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:minHeight="52dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivCard"
+            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_cc_mastercard"/>
+        <TextView
+            android:id="@+id/tvCardName"
+            android:layout_toEndOf="@+id/ivCard"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:text="Mastercard *1234"
+            android:textColor="@color/header"
+            android:textSize="@dimen/txt_size_18"
+            android:fontFamily="@font/exo_regular"/>
+        <TextView
+            android:id="@+id/tvExpiry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvCardName"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:text="exp 09/19"
+            android:textColor="#909090"
+            android:textSize="@dimen/txt_size_15"
+            android:fontFamily="@font/exo_regular"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/ivOverFlow"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_overflow"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".views.TransactionsActivity">
+    <include layout="@layout/custom_toolbar_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/rlBalance"
+        android:layout_width="match_parent"
+        android:visibility="visible"
+        android:layout_below="@+id/toolbar_sub_id"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_margin="15dp"
+        android:layout_height="wrap_content">
+<TextView
+    android:id="@+id/tvBalanceHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/header"
+    android:layout_centerVertical="true"
+    android:textSize="@dimen/txt_size_23"
+    android:fontFamily="@font/exo_extrabold"
+    />
+
+        <ImageView
+            android:id="@+id/ivTokens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/tvBalAmount"
+            android:src="@drawable/ic_token"
+            android:visibility="gone"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:id="@+id/tvBalAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text=""
+            android:textColor="@color/header"
+            android:textSize="@dimen/txt_size_22"
+            android:fontFamily="@font/exo_extrabolditalic"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewToken"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/rlBalance"
+        android:layout_height="001dp"
+        android:visibility="visible"
+        android:background="#eaeaea" />
+<!--
+    <View
+        android:id="@+id/view_cash"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/rl_cash_balance"
+        android:layout_height="001dp"
+        android:visibility="gone"
+        android:background="#eeeeee" />-->
+    <ProgressBar
+        android:id="@+id/trans_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/signup_bg"
+        tools:listitem="@layout/transactions_cell"
+        android:layout_below="@+id/viewToken">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentBottom="true">
+        <RelativeLayout
+            android:id="@+id/rl_add_funds"
+            android:layout_width="match_parent"
+            android:background="@color/primary_color"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvAddFundsForCash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_cash_sm_white"
+                android:padding="10dp"
+                android:text="@string/add_funds_to_play_for_cash"
+                android:textColor="@color/white"
+                android:textSize="@dimen/small_size"
+                android:fontFamily="@font/exo_regular" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/header"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_add_funds"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/btn_bg_green"
+                android:gravity="center"
+                android:text="ADD FUNDS"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_size_19"
+                android:textStyle="bold"
+                android:fontFamily="@font/exo_extrabold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tvWithdrawFunds"
+                android:layout_width="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_withdraw_eges"
+                android:gravity="center"
+                android:text="WITHDRAW FUNDS"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txt_size_14"
+                android:textStyle="bold"
+                android:fontFamily="@font/exo_extrabold"
+                tools:ignore="HardcodedText" />
+            <LinearLayout
+                android:id="@+id/llFaq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/exo_regular"
+                    android:text="Not sure how it works? "
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_size" />
+                <TextView
+                    android:id="@+id/tvFaq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/exo_regular"
+                    android:text="@string/check_out_faq"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/small_size" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

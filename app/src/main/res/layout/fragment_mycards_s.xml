@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="2dp">
+
+    <LinearLayout
+        android:id="@+id/llTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mixed"
+        android:weightSum="2">
+
+        <View
+            android:id="@+id/cardColor"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="#E05153" />
+
+        <FrameLayout
+            android:id="@+id/imagesView"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/player1Img"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/adam_scott" />
+
+                <ImageView
+                    android:id="@+id/player2Img"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-41dp"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/branden_grace" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/fimg1"
+                android:layout_width="80dp"
+                android:layout_height="65dp"
+                android:scaleType="fitStart" />
+
+            <ImageView
+                android:id="@+id/fimg2"
+                android:layout_width="81dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="41dp"
+                android:scaleType="fitStart" />
+
+            <TextView
+                android:id="@+id/count_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="-10dp"
+                android:text="8 / 8"
+                android:textColor="#fff"
+
+                android:fontFamily="@font/exo_bold"
+                android:textSize="@dimen/txt_size_20" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="-25dp"
+            android:orientation="vertical"
+            android:weightSum="8">
+
+            <LinearLayout
+                android:id="@+id/title_sett"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="5"
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <TextView
+                    android:id="@+id/tvCardTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="6.5"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:gravity="center|left"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:text="MLB late snack"
+                    android:textColor="@color/header"
+                    android:textSize="@dimen/normal_size" />
+
+                <LinearLayout
+                    android:id="@+id/wonstas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.5"
+                    android:background="@drawable/parell_green"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvCardw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:text="WIN"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/txt_size_13" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+
+                            android:src="@drawable/ic_cash_sm_white" />
+
+                        <TextView
+                            android:id="@+id/mywins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="3dp"
+                            android:fontFamily="@font/exo_extrabolditalic"
+                            android:gravity="center"
+                            android:text="22"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/txt_size_14"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/stas"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3.5"
+                    android:background="@drawable/parell_gray"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tvCardwin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/exo_extrabold"
+                        android:gravity="center"
+                        android:paddingTop="3dp"
+                        android:text="CANCELLED"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvMatchUpType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentStart="true"
+                    android:drawableStart="@drawable/ic_matchup"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:gravity="center_vertical"
+                    android:paddingTop="2dp"
+                    android:text="MATCH-UP"
+                    android:textAllCaps="true"
+                    android:textColor="@color/btn_dis_bg"
+                    android:textSize="@dimen/small_size" />
+
+                <TextView
+                    android:id="@+id/tvStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:drawableStart="@drawable/ic_access_time_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/exo_bold"
+                    android:layout_marginEnd="10dp"
+                    android:text="45m"
+                    android:textColor="@color/btn_dis_bg"
+                    android:textSize="@dimen/small_size" />
+
+                <LinearLayout
+                    android:id="@+id/llLive"
+                    android:layout_marginBottom="-3dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    android:background="@drawable/card_live"
+                    android:layout_alignParentEnd="true">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="4dp"
+                        android:layout_gravity="center"
+                        android:textSize="@dimen/small_bf_size"
+                        android:gravity="center"
+                        android:fontFamily="@font/exo_extrabolditalic"
+                        android:text="LIVE"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <!--<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="start|center"
+                android:layout_weight="3"
+
+                android:gravity="center|start">
+
+                <TextView
+                    android:id="@+id/tvMatchUpType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:drawableStart="@drawable/ic_matchup"
+                    android:drawablePadding="5dp"
+                    android:fontFamily="@font/exo_extrabold"
+                    android:gravity="center|left"
+                    android:paddingTop="2dp"
+                    android:text="MATCH-UP"
+                    android:textAllCaps="true"
+                    android:textColor="@color/btn_dis_bg"
+                    android:textSize="@dimen/small_size" />
+
+                <TextView
+                    android:id="@+id/tvStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:drawableStart="@drawable/ic_access_time_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:drawableTint="@color/btn_dis_bg"
+                    android:fontFamily="@font/exo_bold"
+                    android:text="45m"
+                    android:textColor="@color/btn_dis_bg"
+                    android:textSize="@dimen/small_size" />
+
+            </RelativeLayout>
+-->
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
