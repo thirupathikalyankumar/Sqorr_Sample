@@ -59,7 +59,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="1dp"
                     android:background="@color/white"
@@ -74,16 +74,13 @@
                         <TextView
                             style="@style/Label_TextView"
                             android:text="@string/full_name"
-                            android:textAllCaps="true"
-
-                            />
+                            android:textAllCaps="true" />
 
                         <EditText
                             android:id="@+id/et_full_name"
                             style="@style/Label_EditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
                             android:background="@android:color/transparent"
                             android:fontFamily="@font/exo_regular"
                             android:hint="@string/full_name_hint"
@@ -120,9 +117,7 @@
                             android:id="@+id/et_email_address"
                             style="@style/Label_EditText"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
-
                             android:background="@android:color/transparent"
                             android:hint="@string/email_hint"
                             android:inputType="textEmailAddress" />
@@ -147,7 +142,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
                     android:layout_marginBottom="5dp"
                     android:background="@color/white"
                     app:cardElevation="0.5dp">
@@ -170,7 +165,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/title"
-
                             android:padding="5dp"
                             app:hintEnabled="false"
                             app:passwordToggleDrawable="@drawable/password_toggle"
@@ -182,7 +176,6 @@
                                 style="@style/Label_EditText"
                                 android:layout_width="match_parent"
                                 android:layout_height="33dp"
-
                                 android:background="@android:color/transparent"
                                 android:hint="@string/pwd_hint"
                                 android:inputType="textPassword" />
@@ -245,7 +238,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-
                     android:background="@color/white"
                     app:cardElevation="0.5dp">
 
@@ -264,7 +256,6 @@
                             android:id="@+id/et_dob"
                             style="@style/Label_EditText"
                             android:layout_width="match_parent"
-
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:cursorVisible="false"
@@ -279,7 +270,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-
                     android:background="@color/white"
                     app:cardElevation="0.5dp">
 
@@ -419,8 +409,8 @@
                     android:id="@+id/already_have_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
                     android:fontFamily="@font/exo_regular"
                     android:gravity="center"
                     android:padding="10dp"

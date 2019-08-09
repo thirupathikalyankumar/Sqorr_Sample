@@ -32,8 +32,7 @@
         <TextView
             android:id="@+id/pagerBT"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="50dp"
             android:background="@drawable/btn_bg_red"
             android:fontFamily="@font/exo_bold"
             android:gravity="center"
@@ -59,12 +58,12 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bg_grey"
+                android:fontFamily="@font/exo_regular"
                 android:gravity="center"
                 android:text="@string/sign_up"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txt_size_18"
-                android:textStyle="normal"
-                android:fontFamily="@font/exo_regular"/>
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/btnLogin"
@@ -74,12 +73,11 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_bg_grey"
+                android:fontFamily="@font/exo_regular"
                 android:gravity="center"
                 android:text="@string/log_in"
                 android:textColor="@color/white"
-                android:textSize="@dimen/txt_size_18"
-                android:fontFamily="@font/exo_regular"
-                />
+                android:textSize="@dimen/txt_size_18" />
 
 
         </LinearLayout>

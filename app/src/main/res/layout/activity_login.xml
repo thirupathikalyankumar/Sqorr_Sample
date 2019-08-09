@@ -86,7 +86,6 @@
                         <View
                             android:id="@+id/email_view"
                             style="@style/Label_ViewLine"
-
                             android:layout_width="match_parent"
                             android:layout_height="1dp" />
                     </LinearLayout>
