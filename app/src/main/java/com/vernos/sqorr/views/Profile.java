@@ -1,27 +1,38 @@
 package com.vernos.sqorr.views;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.vernos.sqorr.R;
+import com.vernos.sqorr.fragments.PromosFragment;
 import com.vernos.sqorr.ui.AppConstants;
+
+import java.util.Objects;
 
 
 public class Profile extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView login_txt, edit_profile,jn_home,tv_cash_toker,tvName,tvProfileScore;
+    private TextView login_txt, edit_profile, jn_home, tv_cash_toker, tvName, tvProfileScore;
     private LinearLayout ll_add_funds, ull;
     private FrameLayout fl;
     private RelativeLayout viewTransactions;
@@ -37,7 +48,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ResourcesCompat.getColor(getResources(),R.color.second_status_bar_color,null));
+            window.setStatusBarColor(ResourcesCompat.getColor(getResources(), R.color.second_status_bar_color, null));
         }
         init();
 
@@ -90,7 +101,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             login_txt.setText("Log in");
             fl.setVisibility(View.VISIBLE);
             ull.setVisibility(View.GONE);
-        } else if (rrole!=null&&rrole.equalsIgnoreCase("cash")) {
+        } else if (rrole != null && rrole.equalsIgnoreCase("cash")) {
             login_txt.setText("Sign out");
             fl.setVisibility(View.GONE);
             ull.setVisibility(View.VISIBLE);
@@ -99,7 +110,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             tv_cash_toker.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_cash, 0, 0, 0);
             tvName.setText(Dashboard.ACCNAME);
             tvProfileScore.setText(Dashboard.MYWiNS);
-        } else if (rrole!=null&&rrole.equalsIgnoreCase("tokens")) {
+        } else if (rrole != null && rrole.equalsIgnoreCase("tokens")) {
             login_txt.setText("Sign out");
             fl.setVisibility(View.GONE);
             ull.setVisibility(View.VISIBLE);
@@ -164,10 +175,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(faq_Intent);
                 break;
             case R.id.linearViewCustomerSupport:
-                Intent cust_Intent = new Intent(Profile.this, WebScreens.class);
+                promoRedeemDialog();
+                /*Intent cust_Intent = new Intent(Profile.this, WebScreens.class);
                 cust_Intent.putExtra("title", AppConstants.CUSTOMER_SUPPORT);
                 cust_Intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(cust_Intent);
+                startActivity(cust_Intent);*/
                 break;
             case R.id.linearViewPrivacyPolicy:
                 Intent pp_Intent = new Intent(Profile.this, WebScreens.class);
@@ -188,5 +200,38 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(about_Intent);
                 break;
         }
+    }
+
+
+    private void promoRedeemDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_promo_redeem, viewGroup, false);
+
+        Button btnViewAllPromos=dialogView.findViewById(R.id.buttonViewAllPromotions);
+        Button btnRedeem=dialogView.findViewById(R.id.btnRedeem);
+        // dialogView.setBackgroundColor(getResources().getColor(R.color.transparent));
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+
+        btnViewAllPromos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnRedeem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(Profile.this, Signup.class);
+                startActivity(in);
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        Objects.requireNonNull(alertDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        //alertDialog.setBackgroundDrawable(Color.TRANSPARENT);
+        alertDialog.show();
     }
 }
