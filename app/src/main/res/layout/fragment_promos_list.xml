@@ -80,14 +80,14 @@
             android:textAllCaps="false"
             android:textColor="@color/header"
             android:textSize="@dimen/txt_size_20"
-            card_view:layout_constraintBottom_toTopOf="@+id/textView"
+            card_view:layout_constraintBottom_toTopOf="@+id/textViewContent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="0.04"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/contentCaption" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -119,7 +119,7 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/textView"
+            card_view:layout_constraintTop_toBottomOf="@+id/textViewContent"
             card_view:layout_constraintVertical_bias="0.192" />
 
         <View
@@ -128,7 +128,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:background="#EAEAEA"
-            card_view:layout_constraintBottom_toTopOf="@+id/textView"
+            card_view:layout_constraintBottom_toTopOf="@+id/textViewContent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintHorizontal_bias="1.0"
             card_view:layout_constraintStart_toStartOf="parent"

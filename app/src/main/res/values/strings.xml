@@ -389,4 +389,27 @@
     <!-- Withdraw Strings -->
     <string name="withdraw_txt">Promo funds are not available for withdrawal.You currently have $0 in promo funds.</string>
 
+
+
+    <string name="location_permission_denied">Location permissions denied,
+        please enable the permissions to use this app.
+    </string>
+    <string name="address_text">"Address: %1$s \n Timestamp: %2$tr"</string>
+    <string name="no_location">No location available</string>
+    <string name="no_address_found">No address found</string>
+    <string name="loading">Loading…</string>
+    <string name="service_not_available">Service not available</string>
+    <string name="invalid_lat_long_used">Invalid coordinates used</string>
+
+
+    <!--Cropping image string-->
+    <string name="device_doesnot_support_crop">Device not supported</string>
+    <string name="error_while_rotatiing_image">Error while rotating the image</string>
+    <string name="user_canceled_to_capture_image">Cancelled image capture</string>
+    <string name="error_in_saving_image">Error saving image</string>
+    <string name="btn_submit_observations">Submit Observations</string>
+    <string name="full_image_view">Full Image view</string>
+    <string name="full_image_view_title">Full Image View</string>
+    <string name="equipment_image_content_des">Equipment image</string>
+    <string name="image_upload_success">Image uploaded successfully</string>
 </resources>

@@ -65,6 +65,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import com.vernos.sqorr.R;
 import com.vernos.sqorr.pojos.MyCardsPojo;
 import com.vernos.sqorr.utilities.APIs;
+import com.vernos.sqorr.utilities.FileUtils;
 import com.vernos.sqorr.utilities.LocationTrack;
 import com.vernos.sqorr.utilities.LocationTracker;
 import com.vernos.sqorr.utilities.LocationUtil;
@@ -78,14 +79,17 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 
-public class ProfileEdit extends AppCompatActivity implements View.OnClickListener {
+public class ProfileEdit extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = ProfileEdit.class.getSimpleName();
     LinearLayout camera_img;
 
 
@@ -119,7 +123,7 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(ResourcesCompat.getColor(getResources(),R.color.second_status_bar_color,null));
+            window.setStatusBarColor(ResourcesCompat.getColor(getResources(), R.color.second_status_bar_color, null));
         }
         init();
     }
@@ -250,11 +254,33 @@ public class ProfileEdit extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
             case R.id.camera_img:
-                showPictureialog();
-
+                // showPictureialog();
+                selectImage();
                 break;
         }
     }
+
+    @Override
+    protected void assignImageToView() {
+        super.assignImageToView();
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ENGLISH).format(new Date());
+
+
+        try {
+            String path = FileUtils.getPath(this, savedpath);
+            Log.e(TAG, "assignImageToView: path " + path);
+            // saveImageToServer(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        File file = new File(savedpath.getPath());
+        Log.e(TAG, "assignImageToView: file " + file);
+        //File file = CompressImageFile(FileUtils.getFile(this, fileUri));
+        //saveImagesToServer(savedpath);
+
+
+    }
+
 
     private void showCalendar() {
         Calendar calendar1 = Calendar.getInstance();

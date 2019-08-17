@@ -37,7 +37,6 @@
             android:layout_height="85dp"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="-20dp"
-            android:layout_marginBottom="-15dp"
             android:baselineAlignBottom="false"
             android:contentDescription="Dollar image"
             android:cropToPadding="false"
@@ -47,9 +46,8 @@
             android:verticalScrollbarPosition="defaultPosition"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintHorizontal_bias="0.78"
-            card_view:layout_constraintStart_toEndOf="@+id/imageView"
-            card_view:layout_constraintVertical_bias="0.78" />
+            card_view:layout_constraintHorizontal_bias="0.8"
+            card_view:layout_constraintStart_toEndOf="@+id/imageView" />
 
 
         <TextView
