@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.vernos.sqorr.AppData;
 import com.vernos.sqorr.R;
 
 import com.vernos.sqorr.adapters.MyCards_Adapter;
@@ -47,8 +48,8 @@ public class MyCardsUpComing extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private PromosFragment.OnListFragmentInteractionListener mListener;
-
-    static List<MyCardsPojo> myCardsPojo_u = new ArrayList<>();
+private AppData appData;
+    //static List<MyCardsPojo> myCardsPojo_u = new ArrayList<>();
 
     static String data_title = "";
 
@@ -62,6 +63,7 @@ public class MyCardsUpComing extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        appData=appData.getInstance();
     }
 
 
@@ -104,7 +106,7 @@ public class MyCardsUpComing extends Fragment {
         cards_cycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         cards_cycle.setItemAnimator(new DefaultItemAnimator());
 
-        if (myCardsPojo_u.size() <= 0) {
+        if (appData.myCardsPojo_u.size() <= 0) {
 
             cards_cycle.setVisibility(View.GONE);
             ll_no.setVisibility(View.VISIBLE);
@@ -138,7 +140,7 @@ public class MyCardsUpComing extends Fragment {
 
             cards_cycle.setVisibility(View.VISIBLE);
             ll_no.setVisibility(View.GONE);
-            MyCards_Adapter adapter = new MyCards_Adapter(myCardsPojo_u, getActivity());
+            adapter = new MyCards_Adapter(appData.myCardsPojo_u, getActivity());
             cards_cycle.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
@@ -147,10 +149,10 @@ public class MyCardsUpComing extends Fragment {
 
     }
 
+    MyCards_Adapter adapter;
 
     public Fragment instantiate(String s, String fname, List<MyCardsPojo> kk) {
-
-        myCardsPojo_u = kk;
+        //myCardsPojo_u = kk;
         data_title = s;
         return null;
     }

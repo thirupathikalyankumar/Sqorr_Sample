@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vernos.sqorr.AppData;
 import com.vernos.sqorr.R;
 import com.vernos.sqorr.adapters.MyCards_Adapter;
 
@@ -29,14 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class MyCardsSettled extends Fragment {
 
     public static final String TAG = MyCardsSettled.class.getSimpleName();
     private static final String ARG_COLUMN_COUNT = "column-count";
 
-
-    static List<MyCardsPojo> myCardsPojo_s = new ArrayList<>();
+    private AppData appData;
+    // static List<MyCardsPojo> myCardsPojo_s = new ArrayList<>();
 
     static String data_title = "";
 
@@ -49,7 +49,7 @@ public class MyCardsSettled extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        appData = appData.getInstance();
     }
 
 
@@ -74,8 +74,6 @@ public class MyCardsSettled extends Fragment {
     }
 
 
-
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -89,7 +87,7 @@ public class MyCardsSettled extends Fragment {
         cards_cycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         cards_cycle.setItemAnimator(new DefaultItemAnimator());
 
-        if (myCardsPojo_s.size() <= 0) {
+        if (appData.myCardsPojo_s.size() <= 0) {
 
             cards_cycle.setVisibility(View.GONE);
             ll_no.setVisibility(View.VISIBLE);
@@ -128,7 +126,7 @@ public class MyCardsSettled extends Fragment {
             cards_cycle.setVisibility(View.VISIBLE);
             ll_no.setVisibility(View.GONE);
 
-            MyCards_Adapter adapter = new MyCards_Adapter(myCardsPojo_s, getActivity());
+            adapter = new MyCards_Adapter(appData.myCardsPojo_s, getActivity());
 
 
             cards_cycle.setAdapter(adapter);
@@ -138,10 +136,12 @@ public class MyCardsSettled extends Fragment {
 
     }
 
+    MyCards_Adapter adapter;
+
 
     public Fragment instantiate(String s, String fname, List<MyCardsPojo> kk) {
-        Log.e("145--->","145- S------------>"+s);
-        myCardsPojo_s = kk;
+        Log.e("145--->", "145- S------------>" + s);
+        //myCardsPojo_s = kk;
         data_title = s;
         return null;
     }

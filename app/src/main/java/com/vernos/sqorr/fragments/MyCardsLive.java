@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vernos.sqorr.AppData;
 import com.vernos.sqorr.R;
 import com.vernos.sqorr.adapters.MyCards_Adapter;
 import com.vernos.sqorr.adapters.MyMLBRecyclerViewAdapter;
@@ -44,7 +45,8 @@ public class MyCardsLive extends Fragment {
 
     }
 
-    static List<MyCardsPojo> myCardsPojo_l = new ArrayList<>();
+    private AppData appData;
+    //static List<MyCardsPojo> myCardsPojo_l = new ArrayList<>();
 
     static String data_title = "";
 
@@ -67,7 +69,7 @@ public class MyCardsLive extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
+        appData = appData.getInstance();
     }
 
     @Override
@@ -90,7 +92,7 @@ public class MyCardsLive extends Fragment {
         cards_cycle.setLayoutManager(new LinearLayoutManager(getActivity()));
         cards_cycle.setItemAnimator(new DefaultItemAnimator());
 
-        if (myCardsPojo_l.size() <= 0) {
+        if (appData.myCardsPojo_l.size() <= 0) {
 
             cards_cycle.setVisibility(View.GONE);
             ll_no.setVisibility(View.VISIBLE);
@@ -126,7 +128,7 @@ public class MyCardsLive extends Fragment {
             cards_cycle.setVisibility(View.VISIBLE);
             ll_no.setVisibility(View.GONE);
 
-            MyCards_Adapter adapter = new MyCards_Adapter(myCardsPojo_l, getActivity());
+            adapter = new MyCards_Adapter(appData.myCardsPojo_l, getActivity());
 
 
             cards_cycle.setAdapter(adapter);
@@ -137,12 +139,12 @@ public class MyCardsLive extends Fragment {
 
     }
 
-
+    MyCards_Adapter adapter;
 
 
     public Fragment instantiate(String s, String fname, List<MyCardsPojo> kk) {
-        Log.e("145--->","145- live-->"+s);
-        myCardsPojo_l = kk;
+        Log.e("145--->", "145- live-->" + s);
+        // myCardsPojo_l = kk;
         data_title = s;
         return null;
     }

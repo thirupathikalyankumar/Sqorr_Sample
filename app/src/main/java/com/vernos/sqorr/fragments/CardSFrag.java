@@ -22,6 +22,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.google.android.material.tabs.TabLayout;
+import com.vernos.sqorr.AppData;
 import com.vernos.sqorr.R;
 import com.vernos.sqorr.adapters.TabsAdapter;
 import com.vernos.sqorr.pojos.MyCardsPojo;
@@ -41,19 +42,22 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
 
     LinearLayout without, withtc;
 
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
-    List<MyCardsPojo> myCardsPojo_u = new ArrayList<>();
+    private AppData appData;
+   /* List<MyCardsPojo> myCardsPojo_u = new ArrayList<>();
     List<MyCardsPojo> myCardsPojo_l = new ArrayList<>();
-    List<MyCardsPojo> myCardsPojo_s = new ArrayList<>();
+    List<MyCardsPojo> myCardsPojo_s = new ArrayList<>();*/
 
     PresetValueButton all_pvb, EPL_pvb, LA_LIGA_pvb, mlb_pvb, mls_pvb, NASCAR_pvb, NBA_pvb, NCAAMB_pvb, NFL_pvb, NHL_pvb, PGA_pvb;
 
     ProgressBar progressBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appData = appData.getInstance();
     }
 
     @Override
@@ -61,7 +65,7 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fragtwo, container, false);
-    progressBar = v.findViewById(R.id.progressBar);
+        progressBar = v.findViewById(R.id.progressBar);
         viewPager = v.findViewById(R.id.pager_mycards);
 
         progressBar.setVisibility(View.VISIBLE);
@@ -72,130 +76,141 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
     }
 
     private void getApp() {
+        if (appData.myCardsPojoList.length() == 0) {
+
+            Log.e("70-----", "Start");
+            AndroidNetworking.get(APIs.MY_CARDS)
+                    .setPriority(Priority.HIGH)
+                    .addHeaders("sessionToken", Dashboard.SESSIONTOKEN)
+                    .build()
+                    .getAsJSONArray(new JSONArrayRequestListener() {
+                        @Override
+                        public void onResponse(JSONArray response) {
 
 
-        Log.e("70-----","Start");
-        AndroidNetworking.get(APIs.MY_CARDS)
-                .setPriority(Priority.HIGH)
-                .addHeaders("sessionToken", Dashboard.SESSIONTOKEN)
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-
-                        Log.e("80-----","Response Start");
-
-                        // do anything with response
-                        for (int i = 0; i < response.length(); i++) {
-
+                            Log.e("80-----", "Response Start");
                             try {
-                                JSONObject jb = response.getJSONObject(i);
-
-
-                                Log.e("90--", jb.toString());
-
-                                String status_data = jb.getString("status");
-                                if (status_data.equalsIgnoreCase("PENDING")) {
-                                    MyCardsPojo mp = new MyCardsPojo();
-
-                                    JSONArray ja = jb.getJSONArray("playerImages");
-
-                                    String a1 = String.valueOf(ja.get(0));
-                                    String a2 = String.valueOf(ja.get(1));
-
-                                    mp.setCardId(jb.getString("cardId"));
-                                    mp.setCardTitle(jb.getString("cardTitle"));
-                                    mp.setMatchupType(jb.getString("matchupType"));
-                                    mp.setStartTime(jb.getString("startTime"));
-                                    mp.setLeagueId(jb.getString("leagueId"));
-                                    mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
-                                    mp.setPlayerImageLeft(a1);
-                                    mp.setPlayerImageRight(a2);
-                                    mp.setStatus(jb.getString("status"));
-                                    mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
-                                    mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
-                                    mp.setMatchupsWon(jb.getString("matchupsWon"));
-                                    mp.setSettlementDate(jb.getString("settlementDate"));
-//                                    mp.setWinAmount(jb.getString("winAmount"));
-                                    myCardsPojo_u.add(mp);
-
-                                } else if (status_data.equalsIgnoreCase("LIVE")) {
-
-                                    MyCardsPojo mp = new MyCardsPojo();
-                                    JSONArray ja = jb.getJSONArray("playerImages");
-
-                                    String a1 = String.valueOf(ja.get(0));
-                                    String a2 = String.valueOf(ja.get(1));
-
-                                    mp.setCardId(jb.getString("cardId"));
-                                    mp.setCardTitle(jb.getString("cardTitle"));
-                                    mp.setMatchupType(jb.getString("matchupType"));
-                                    mp.setStartTime(jb.getString("startTime"));
-                                    mp.setLeagueId(jb.getString("leagueId"));
-                                    mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
-
-                                    mp.setPlayerImageLeft(a1);
-                                    mp.setPlayerImageRight(a2);
-                                    mp.setStatus(jb.getString("status"));
-                                    mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
-                                    mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
-                                    mp.setMatchupsWon(jb.getString("matchupsWon"));
-                                    mp.setSettlementDate(jb.getString("settlementDate"));
-//                                    mp.setWinAmount(jb.getString("winAmount"));
-
-                                    myCardsPojo_l.add(mp);
-                                } else {
-
-                                    MyCardsPojo mp = new MyCardsPojo();
-                                    JSONArray ja = jb.getJSONArray("playerImages");
-
-                                    String a1 = String.valueOf(ja.get(0));
-                                    String a2 = String.valueOf(ja.get(1));
-
-                                    mp.setCardId(jb.getString("cardId"));
-                                    mp.setCardTitle(jb.getString("cardTitle"));
-                                    mp.setMatchupType(jb.getString("matchupType"));
-                                    mp.setStartTime(jb.getString("startTime"));
-                                    mp.setLeagueId(jb.getString("leagueId"));
-                                    mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
-
-                                    mp.setPlayerImageLeft(a1);
-                                    mp.setPlayerImageRight(a2);
-                                    mp.setStatus(jb.getString("status"));
-                                    mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
-                                    mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
-                                    mp.setMatchupsWon(jb.getString("matchupsWon"));
-                                    mp.setSettlementDate(jb.getString("settlementDate"));
-//                                    mp.setWinAmount(jb.getString("winAmount"));
-
-
-                                    myCardsPojo_s.add(mp);
-
-                                }
-
+                                appData.myCardsPojoList = response.getJSONObject(0);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
+                            // do anything with response
+                            for (int i = 0; i < response.length(); i++) {
 
+                                try {
+                                    JSONObject jb = response.getJSONObject(i);
+
+
+                                    Log.e("90--", jb.toString());
+
+                                    String status_data = jb.getString("status");
+                                    if (status_data.equalsIgnoreCase("PENDING")) {
+                                        MyCardsPojo mp = new MyCardsPojo();
+
+                                        JSONArray ja = jb.getJSONArray("playerImages");
+
+                                        String a1 = String.valueOf(ja.get(0));
+                                        String a2 = String.valueOf(ja.get(1));
+
+                                        mp.setCardId(jb.getString("cardId"));
+                                        mp.setCardTitle(jb.getString("cardTitle"));
+                                        mp.setMatchupType(jb.getString("matchupType"));
+                                        mp.setStartTime(jb.getString("startTime"));
+                                        mp.setLeagueId(jb.getString("leagueId"));
+                                        mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
+                                        mp.setPlayerImageLeft(a1);
+                                        mp.setPlayerImageRight(a2);
+                                        mp.setStatus(jb.getString("status"));
+                                        mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
+                                        mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
+                                        mp.setMatchupsWon(jb.getString("matchupsWon"));
+                                        mp.setSettlementDate(jb.getString("settlementDate"));
+//                                    mp.setWinAmount(jb.getString("winAmount"));
+                                        appData.myCardsPojo_u.add(mp);
+
+                                    } else if (status_data.equalsIgnoreCase("LIVE")) {
+
+                                        MyCardsPojo mp = new MyCardsPojo();
+                                        JSONArray ja = jb.getJSONArray("playerImages");
+
+                                        String a1 = String.valueOf(ja.get(0));
+                                        String a2 = String.valueOf(ja.get(1));
+
+                                        mp.setCardId(jb.getString("cardId"));
+                                        mp.setCardTitle(jb.getString("cardTitle"));
+                                        mp.setMatchupType(jb.getString("matchupType"));
+                                        mp.setStartTime(jb.getString("startTime"));
+                                        mp.setLeagueId(jb.getString("leagueId"));
+                                        mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
+
+                                        mp.setPlayerImageLeft(a1);
+                                        mp.setPlayerImageRight(a2);
+                                        mp.setStatus(jb.getString("status"));
+                                        mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
+                                        mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
+                                        mp.setMatchupsWon(jb.getString("matchupsWon"));
+                                        mp.setSettlementDate(jb.getString("settlementDate"));
+//                                    mp.setWinAmount(jb.getString("winAmount"));
+
+                                        appData.myCardsPojo_l.add(mp);
+                                    } else {
+
+                                        MyCardsPojo mp = new MyCardsPojo();
+                                        JSONArray ja = jb.getJSONArray("playerImages");
+
+                                        String a1 = String.valueOf(ja.get(0));
+                                        String a2 = String.valueOf(ja.get(1));
+
+                                        mp.setCardId(jb.getString("cardId"));
+                                        mp.setCardTitle(jb.getString("cardTitle"));
+                                        mp.setMatchupType(jb.getString("matchupType"));
+                                        mp.setStartTime(jb.getString("startTime"));
+                                        mp.setLeagueId(jb.getString("leagueId"));
+                                        mp.setLeagueAbbrevation(jb.getString("leagueAbbrevation"));
+
+                                        mp.setPlayerImageLeft(a1);
+                                        mp.setPlayerImageRight(a2);
+                                        mp.setStatus(jb.getString("status"));
+                                        mp.setCurrencyTypeIsTokens(jb.getString("currencyTypeIsTokens"));
+                                        mp.setMatchupsPlayed(jb.getString("matchupsPlayed"));
+                                        mp.setMatchupsWon(jb.getString("matchupsWon"));
+                                        mp.setSettlementDate(jb.getString("settlementDate"));
+//                                    mp.setWinAmount(jb.getString("winAmount"));
+
+
+                                        appData.myCardsPojo_s.add(mp);
+
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            cardsData();
+                            progressBar.setVisibility(View.GONE);
+                            viewPager.setVisibility(View.VISIBLE);
                         }
 
-                        cardsData();
-                        progressBar.setVisibility(View.GONE);
-                        viewPager.setVisibility(View.VISIBLE);
-                    }
+                        @Override
+                        public void onError(ANError error) {
+                            // handle error
+                            Log.e("184-----", "error Start");
+                        }
+                    });
 
 
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Log.e("184-----","error Start");
-                    }
-                });
+            sethomeAll(appData.myCardsPojo_u, appData.myCardsPojo_l, appData.myCardsPojo_s, "ALL");
+        } else {
 
+            cardsData();
+            progressBar.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
 
-        sethomeAll(myCardsPojo_u,myCardsPojo_l,myCardsPojo_s,"ALL");
+        }
+
     }
 
     @Override
@@ -251,7 +266,7 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
             withtc.setVisibility(View.VISIBLE);
 
             getApp();
-            sethomeAll(myCardsPojo_u, myCardsPojo_l, myCardsPojo_s, "ALL");
+            sethomeAll(appData.myCardsPojo_u, appData.myCardsPojo_l, appData.myCardsPojo_s, "ALL");
 
         }
 
@@ -294,156 +309,156 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
 
 
     private void cardsData() {
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("EPL")) {
-                EPLData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("EPL")) {
+                EPLData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("EPL")) {
-                EPLData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("EPL")) {
+                EPLData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("EPL")) {
-                EPLData_s.add(myCardsPojo_s.get(i));
-            }
-        }
-
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
-                LALIGAData_u.add(myCardsPojo_u.get(i));
-            }
-        }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
-                LALIGAData_l.add(myCardsPojo_l.get(i));
-            }
-        }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
-                LALIGAData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("EPL")) {
+                EPLData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
 
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("MLB")) {
-                MLBData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
+                LALIGAData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("MLB")) {
-                MLBData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
+                LALIGAData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("MLB")) {
-                MLBData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("LA_LIGA")) {
+                LALIGAData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("MLS")) {
-                MLSData_u.add(myCardsPojo_u.get(i));
+
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("MLB")) {
+                MLBData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("MLS")) {
-                MLSData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("MLB")) {
+                MLBData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("MLS")) {
-                MLSData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("MLB")) {
+                MLBData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NASCAR")) {
-                NASCARData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("MLS")) {
+                MLSData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NASCAR")) {
-                NASCARData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("MLS")) {
+                MLSData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NASCAR")) {
-                NASCARData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("MLS")) {
+                MLSData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NBA")) {
-                NBAData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NASCAR")) {
+                NASCARData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NBA")) {
-                NBAData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NASCAR")) {
+                NASCARData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NBA")) {
-                NBAData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NASCAR")) {
+                NASCARData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
-                NCAAMBData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NBA")) {
+                NBAData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
-                NCAAMBData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NBA")) {
+                NBAData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
-                NCAAMBData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NBA")) {
+                NBAData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NFL")) {
-                NFLData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
+                NCAAMBData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NFL")) {
-                NFLData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
+                NCAAMBData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NFL")) {
-                NFLData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NCAAMB")) {
+                NCAAMBData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NHL")) {
-                NHLData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NFL")) {
+                NFLData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NHL")) {
-                NHLData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NFL")) {
+                NFLData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NHL")) {
-                NHLData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NFL")) {
+                NFLData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_u.size(); i++) {
-            if (myCardsPojo_u.get(i).getLeagueAbbrevation().contains("PGA")) {
-                PGAData_u.add(myCardsPojo_u.get(i));
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("NHL")) {
+                NHLData_u.add(appData.myCardsPojo_u.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_l.size(); i++) {
-            if (myCardsPojo_l.get(i).getLeagueAbbrevation().contains("PGA")) {
-                PGAData_l.add(myCardsPojo_l.get(i));
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("NHL")) {
+                NHLData_l.add(appData.myCardsPojo_l.get(i));
             }
         }
-        for (int i = 0; i < myCardsPojo_s.size(); i++) {
-            if (myCardsPojo_s.get(i).getLeagueAbbrevation().contains("PGA")) {
-                PGAData_s.add(myCardsPojo_s.get(i));
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("NHL")) {
+                NHLData_s.add(appData.myCardsPojo_s.get(i));
+            }
+        }
+        for (int i = 0; i < appData.myCardsPojo_u.size(); i++) {
+            if (appData.myCardsPojo_u.get(i).getLeagueAbbrevation().contains("PGA")) {
+                PGAData_u.add(appData.myCardsPojo_u.get(i));
+            }
+        }
+        for (int i = 0; i < appData.myCardsPojo_l.size(); i++) {
+            if (appData.myCardsPojo_l.get(i).getLeagueAbbrevation().contains("PGA")) {
+                PGAData_l.add(appData.myCardsPojo_l.get(i));
+            }
+        }
+        for (int i = 0; i < appData.myCardsPojo_s.size(); i++) {
+            if (appData.myCardsPojo_s.get(i).getLeagueAbbrevation().contains("PGA")) {
+                PGAData_s.add(appData.myCardsPojo_s.get(i));
             }
         }
 
@@ -454,7 +469,7 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
         switch (v.getId()) {
             case R.id.all /*2131230804*/:
                 getActivity().findViewById(R.id.all).setSelected(true);
-                sethomeAll(myCardsPojo_u, myCardsPojo_l, myCardsPojo_s, "ALL");
+                sethomeAll(appData.myCardsPojo_u, appData.myCardsPojo_l, appData.myCardsPojo_s, "ALL");
                 return;
             case R.id.EPL /*2131230804*/:
                 getActivity().findViewById(R.id.EPL);//.setSelected(true);
@@ -502,8 +517,9 @@ public class CardSFrag extends Fragment implements ViewPager.OnPageChangeListene
         }
     }
 
-    private void sethomeAll(List<MyCardsPojo> myCardsPojo_u, List<MyCardsPojo> myCardsPojo_l,
-                            List<MyCardsPojo> myCardsPojo_s, String l) {
+    private void sethomeAll
+            (List<MyCardsPojo> myCardsPojo_u, List<MyCardsPojo> myCardsPojo_l,
+             List<MyCardsPojo> myCardsPojo_s, String l) {
 
         tabLayout = getActivity().findViewById(R.id.tablayout);
 

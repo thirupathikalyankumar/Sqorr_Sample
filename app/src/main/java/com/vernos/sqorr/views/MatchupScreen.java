@@ -29,6 +29,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.vernos.sqorr.AppData;
 import com.vernos.sqorr.R;
 import com.vernos.sqorr.adapters.NewPlayerListAdapter;
 import com.vernos.sqorr.adapters.PicksAdapter;
@@ -92,7 +93,7 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
         return list;
     }
 
-    String getcardID, cardColor,Legue_id;
+    String getcardID, cardColor, Legue_id;
     ProgressDialog loading = null;
     Window window;
 
@@ -103,19 +104,18 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_matchup_screen);
 
 
-        Bundle bundle =getIntent().getExtras();
-        if(bundle!=null){
-            if(bundle.containsKey("cardid"))
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            if (bundle.containsKey("cardid"))
                 getcardID = bundle.getString("cardid");
 
-            if(bundle.containsKey("cardid_color"))
-                cardColor=bundle.getString("cardid_color");
-            if(bundle.containsKey("cardid_color1"))
-                Legue_id=bundle.getString("cardid_color1");
+            if (bundle.containsKey("cardid_color"))
+                cardColor = bundle.getString("cardid_color");
+            if (bundle.containsKey("cardid_color1"))
+                Legue_id = bundle.getString("cardid_color1");
 
             Log.e("C id----", getcardID + "--" + cardColor);
         }
-
 
 
 /*
@@ -129,9 +129,12 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
 
         initViews();
         initApiCall();
+        playBtn.setOnClickListener(this);
     }
+
     ProgressBar progressBar;
     RelativeLayout match_header;
+
     private void initViews() {
         progressBar = findViewById(R.id.indeterminateBar);
 
@@ -148,7 +151,7 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
 
         final String leagueName = Legue_id;
 
-        if (leagueName != null){
+        if (leagueName != null) {
 
             switch (leagueName) {
                 case "NFL":
@@ -205,8 +208,8 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
                 default:
                     break;
             }
-        }else{
-            window.setStatusBarColor(ResourcesCompat.getColor(getResources(),R.color.second_status_bar_color,null));
+        } else {
+            window.setStatusBarColor(ResourcesCompat.getColor(getResources(), R.color.second_status_bar_color, null));
         }
 
         layoutBottomSheet = (LinearLayout) findViewById(R.id.bottom_sheet);
@@ -263,21 +266,19 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
         content_rv.setAdapter(picksAdapter);
 
 
-
     }
 
     private void initApiCall() {
 
-        if( !TextUtils.isEmpty(Dashboard.SESSIONTOKEN)){
+        if (!TextUtils.isEmpty(Dashboard.SESSIONTOKEN)) {
             getApiCallWith(Dashboard.SESSIONTOKEN);
-        }else{
+        } else {
             getApiWithOut();
         }
 
     }
+
     private void getApiWithOut() {
-
-
 
 
         AndroidNetworking.get(APIs.CARD_DETAILS + getcardID + "/matchups")
@@ -292,7 +293,7 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
 
                         GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
                         final Gson gson = builder.create();
-                        final  Type type = new TypeToken<MatchupModel>() {
+                        final Type type = new TypeToken<MatchupModel>() {
                         }.getType();
 
                         try {
@@ -300,8 +301,7 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
                             final MatchupModel matchupModel = gson.fromJson(response.toString(), type);
 
 
-
-                                String json = response.toString();
+                            String json = response.toString();
                             try {
                                 JSONObject jsonObject = new JSONObject(json);
                                 jsonArray = jsonObject.getJSONArray("matchups");
@@ -497,7 +497,7 @@ public class MatchupScreen extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.playBtn:
-
+                AppData.getInstance().clearAllData();
 
                 break;
         }
